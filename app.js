@@ -1,71 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
-  //code goes here
+  // code goes here
   const grid = document.querySelector('.grid');
   let squares = Array.from(document.querySelectorAll('.grid div'));
   const scoreDisplay = document.querySelector('#score');
   const startBtn = document.querySelector('#start-button');
-  const width = 10; //width of title
+  const tileWidth = 10; // tileWidth of title
   let nextRandom = 0;
   let timerId
-  let howFast = 500; //determines speed of setInterval
+  let howFast = 500; // determines speed of setInterval
   let score = 0;
 
   const colors =  ['#305252', '#436262', '#547070', '#8A9F9F', '#603896', '#414361', '#2A2D43'];//give colors to tetrominoes
 
 
-/*
-'#547070',
-'#647D7D',
-'#728989',
-,
+  /*
+  '#547070',
+  '#647D7D',
+  '#728989',
+  ,
 
-*/
+  */
   //The Terominoes--around 36:00 in the tutorial
 
   const lTetromino = [
-    [1, width + 1, width*2 + 1, 2],
-    [width, width+1, width+2, width*2+2],
-    [1, width + 1, width*2, width*2+1],
-    [width, width*2, width*2+1, width*2+2]
+    [1, tileWidth + 1, tileWidth*2 + 1, 2],
+    [tileWidth, tileWidth+1, tileWidth+2, tileWidth*2+2],
+    [1, tileWidth + 1, tileWidth*2, tileWidth*2+1],
+    [tileWidth, tileWidth*2, tileWidth*2+1, tileWidth*2+2]
   ];
   const zTetromino = [
-    [1, 2, width, width+1],
-    [0, width, width+1, width*2 + 1],
-    [1, 2, width, width+1],
-    [0, width, width+1, width*2 + 1]
+    [1, 2, tileWidth, tileWidth+1],
+    [0, tileWidth, tileWidth+1, tileWidth*2 + 1],
+    [1, 2, tileWidth, tileWidth+1],
+    [0, tileWidth, tileWidth+1, tileWidth*2 + 1]
   ];
   const tTetromino = [
-    [width, width+1, width+2, 1],
-    [1, width+1, width*2+1, width+2],
-    [width, width+1, width+2, width*2+1],
-    [1, width+1, width*2+1, width]
+    [tileWidth, tileWidth+1, tileWidth+2, 1],
+    [1, tileWidth+1, tileWidth*2+1, tileWidth+2],
+    [tileWidth, tileWidth+1, tileWidth+2, tileWidth*2+1],
+    [1, tileWidth+1, tileWidth*2+1, tileWidth]
   ];
   const iTetromino = [
-    [1, width+1, width*2 + 1, width*3 + 1],
-    [width, width+1, width+2, width+3],
-    [1, width+1, width*2 + 1, width*3 + 1],
-    [width, width+1, width+2, width+3]
+    [1, tileWidth+1, tileWidth*2 + 1, tileWidth*3 + 1],
+    [tileWidth, tileWidth+1, tileWidth+2, tileWidth+3],
+    [1, tileWidth+1, tileWidth*2 + 1, tileWidth*3 + 1],
+    [tileWidth, tileWidth+1, tileWidth+2, tileWidth+3]
   ];
   const oTetromino = [
-    [0,1, width, width+1],
-    [0,1, width, width+1],
-    [0,1, width, width+1],
-    [0,1, width, width+1]
+    [0,1, tileWidth, tileWidth+1],
+    [0,1, tileWidth, tileWidth+1],
+    [0,1, tileWidth, tileWidth+1],
+    [0,1, tileWidth, tileWidth+1]
   ];
   //added these two
   //other missing tetrominos: mirror z & mirror l
   //these were not in the tutorial
   const mzTetrominio = [
-    [0, 1, width + 1, width + 2],
-    [2, width+1, width+2, width*2+1],
-    [0, 1, width + 1, width + 2],
-    [2, width+1, width+2, width*2+1]
+    [0, 1, tileWidth + 1, tileWidth + 2],
+    [2, tileWidth+1, tileWidth+2, tileWidth*2+1],
+    [0, 1, tileWidth + 1, tileWidth + 2],
+    [2, tileWidth+1, tileWidth+2, tileWidth*2+1]
   ];
   const mlTetromino = [
-    [0, 1, width+1, width*2 + 1],
-    [width, width+1, width+2, 2],
-    [1, width+1, width*2+1, width*2+2],
-    [width, width+1, width+2, width*2]
+    [0, 1, tileWidth+1, tileWidth*2 + 1],
+    [tileWidth, tileWidth+1, tileWidth+2, 2],
+    [1, tileWidth+1, tileWidth*2+1, tileWidth*2+2],
+    [tileWidth, tileWidth+1, tileWidth+2, tileWidth*2]
   ];
 
   const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino, mzTetrominio, mlTetromino];
@@ -118,14 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function moveDown() {
     undraw();
-    currentPosition += width;
+    currentPosition += tileWidth;
     draw();
     freeze();
   }
   //freeze function
   //50:42
   function freeze() {
-    if (current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+    if (current.some(index => squares[currentPosition + index + tileWidth].classList.contains('taken'))) {
       current.forEach(index => squares[currentPosition + index].classList.add('taken'));
       //start a new teromino falling
       random = nextRandom;
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function moveLeft() {
     undraw();
     //use modulo to check if at left edge
-    const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0);
+    const isAtLeftEdge = current.some(index => (currentPosition + index) % tileWidth === 0);
     if (!isAtLeftEdge) {
       currentPosition -= 1;
     }
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //keycodes 58:15
   function moveRight() {
     undraw();
-    const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1);
+    const isAtRightEdge = current.some(index => (currentPosition + index) % tileWidth === tileWidth - 1);
 
     if (!isAtRightEdge) {
       currentPosition += 1;
@@ -171,28 +171,28 @@ document.addEventListener('DOMContentLoaded', () => {
   function rotate() {
     undraw();
     currentRotation++;
-    if(currentRotation === current.length) { //if we reach max rotations
+    if(currentRotation === current.length) { // if we reach max rotations
       currentRotation = 0;
     }
     current = theTetrominoes[random][currentRotation];
     draw();
   }
 
-  //show up-next teromino in the mini-grid
+  // show up-next teromino in the mini-grid
   const displaySquares = document.querySelectorAll('.mini-grid div');
-  const displayWidth = 4;
+  const upNextWidth = 4;
   let displayIndex = 0;
 
-  //the tetrominos without rotations
+  // the tetrominos without rotations
   const upNextTetrominoes = [
-    [1, displayWidth + 1, displayWidth*2 + 1, 2], //lTetromino
-    [1, 2, displayWidth, displayWidth+1],//zTetromino
-    [displayWidth, displayWidth+1, displayWidth+2, 1],//tTetromino
-    [0,1, displayWidth, displayWidth+1],//oTetromino
-    [1, displayWidth+1, displayWidth*2 + 1, displayWidth*3 + 1], //iTetromino
-    [0, 1, displayWidth + 1, displayWidth + 2], //mzTetrominio
-    [0, 1, displayWidth+1, displayWidth*2 + 1] //mlTetromino
-  ]; //indexes based on mini-grid display
+    [1, upNextWidth + 1, upNextWidth*2 + 1, 2], // lTetromino
+    [1, 2, upNextWidth, upNextWidth+1], // zTetromino
+    [upNextWidth, upNextWidth+1, upNextWidth+2, 1], // tTetromino
+    [0,1, upNextWidth, upNextWidth+1], // oTetromino
+    [1, upNextWidth+1, upNextWidth*2 + 1, upNextWidth*3 + 1], // iTetromino
+    [0, 1, upNextWidth + 1, upNextWidth + 2], // mzTetrominio
+    [0, 1, upNextWidth+1, upNextWidth*2 + 1] // mlTetromino
+  ]; // indexes based on mini-grid display
 
   //display the shape in the mini-grid display
   function displayShape() {
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //add score
   function addScore() {
-    for (let i = 0; i < 199; i+=width) {
+    for (let i = 0; i < 199; i+=tileWidth) {
       const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9];
 
       if(row.every(index => squares[index].classList.contains('taken'))) {
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[index].style.backgroundColor = '';
 
         })
-        const squaresRemoved = squares.splice(i, width);
+        const squaresRemoved = squares.splice(i, tileWidth);
         squares = squaresRemoved.concat(squares);
         squares.forEach(cell => grid.appendChild(cell))
       }
