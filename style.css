@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+}
+
+.grid {
+  background-color: #BAC7BE;/*#BAC7BE;*/
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 200px;
+}
+
+.grid div {
+  /* #25291C */
+  height: 20px;
+  width: 20px;
+}
+
+.tetromino {
+  background-color: #305252; /*#305252;*/
+  border-radius: 10%;
+  box-shadow: inset 0 0 0 1px #77878b;
+}
+
+.mini-grid {
+  /*background-color: #90b494;*/ /*temporarily removed background color for mini-grid*/
+  display: flex;
+  flex-wrap: wrap;
+  height: 80px;
+  margin-left: 50px;
+  width: 80px;
+}
+
+.mini-grid div {
+  height: 20px;
+  width: 20px;
+}
