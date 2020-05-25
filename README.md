@@ -1,7 +1,7 @@
 # tetris-clone
-A basic version of Tetris. Created by following along with a tutorial and then adding features (see README for more). 
+A basic version of Tetris. Created by following along with a tutorial (see links below) and then adding custom features. 
 
-Features Added to original:
+Custom Features Added to the Original:
 
 5/24/2020:
 -Score persists when game over is displayed (until browser is refreshed);
