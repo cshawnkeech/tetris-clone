@@ -16,20 +16,37 @@
   width: 20px;
 }
 
+.move-buttons {
+  background-color: grey;
+  border-radius: 0 0 15px 15px;
+  width: 200px;
+}
+
 #left-button {
+  border-radius: 10px;
   color: blue;
+  margin: 20px 10px 0 20px;
+  padding: 10px;
 }
 
 #right-button {
+  border-radius: 10px;
   color: red;
+  padding: 10px;
 }
 
 #rotate-counter-clockwise {
-  color: orange;
+  background: red;
+  color:orange;
+  padding: 10px;
+  border-radius: 50%;
+  margin: 0 0 0 10px;
 }
 
 #down-button {
+  border-radius: 10px;
   color: green;
+  margin: 10px 0 10px 50px;
 }
 
 
