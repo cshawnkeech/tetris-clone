@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let squares = Array.from(document.querySelectorAll('.grid div'));
   const scoreDisplay = document.querySelector('#score');
   const startBtn = document.querySelector('#start-button');
+  const leftBtn = document.querySelector('#left-button');
+  const rightBtn = document.querySelector('#right-button');
+  const rotateCC = document.querySelector('#rotate-counter-clockwise');
+  const drop = document.querySelector('#down-button');
   const tileWidth = 10; // tileWidth of title
   let nextRandom = 0;
   let timerId
@@ -20,10 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ,
 
   */
-  //The Terominoes--around 36:00 in the tutorial
+  // The Terominoes--around 36:00 in the tutorial
 
   const lTetromino = [
-    [1, tileWidth + 1, tileWidth*2 + 1, 2],
+    [1, tileWidth + 1, tileWidth * 2 + 1, 2],
     [tileWidth, tileWidth+1, tileWidth+2, tileWidth*2+2],
     [1, tileWidth + 1, tileWidth*2, tileWidth*2+1],
     [tileWidth, tileWidth*2, tileWidth*2+1, tileWidth*2+2]
@@ -41,20 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
     [1, tileWidth+1, tileWidth*2+1, tileWidth]
   ];
   const iTetromino = [
-    [1, tileWidth+1, tileWidth*2 + 1, tileWidth*3 + 1],
-    [tileWidth, tileWidth+1, tileWidth+2, tileWidth+3],
-    [1, tileWidth+1, tileWidth*2 + 1, tileWidth*3 + 1],
-    [tileWidth, tileWidth+1, tileWidth+2, tileWidth+3]
+    [1, tileWidth + 1, tileWidth * 2 + 1, tileWidth * 3 + 1],
+    [tileWidth, tileWidth + 1, tileWidth + 2, tileWidth + 3],
+    [1, tileWidth + 1, tileWidth * 2 + 1, tileWidth * 3 + 1],
+    [tileWidth, tileWidth + 1, tileWidth + 2, tileWidth + 3]
   ];
   const oTetromino = [
-    [0,1, tileWidth, tileWidth+1],
-    [0,1, tileWidth, tileWidth+1],
-    [0,1, tileWidth, tileWidth+1],
-    [0,1, tileWidth, tileWidth+1]
+    [0, 1, tileWidth, tileWidth + 1],
+    [0, 1, tileWidth, tileWidth + 1],
+    [0, 1, tileWidth, tileWidth + 1],
+    [0, 1, tileWidth, tileWidth + 1]
   ];
-  //added these two
-  //other missing tetrominos: mirror z & mirror l
-  //these were not in the tutorial
+  // added these two
+  // other missing tetrominos: mirror z & mirror l
+  // these were not in the tutorial
   const mzTetrominio = [
     [0, 1, tileWidth + 1, tileWidth + 2],
     [2, tileWidth+1, tileWidth+2, tileWidth*2+1],
@@ -110,9 +114,33 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (e.keyCode === 40) {
         moveDown();
       }
+
     }
 
   }
+
+  // move using on-screen buttons
+  leftBtn.addEventListener('click', () => {
+    if (!gameOver() && timerId !== null) {
+      moveLeft();
+    }
+  })
+  rightBtn.addEventListener('click', () => {
+    if (!gameOver() && timerId !== null) {
+      moveRight();
+    }
+  })
+  rotateCC.addEventListener('click', () => {
+    if (!gameOver() && timerId !== null) {
+      rotate();
+    }
+  })
+  drop.addEventListener('click', () => {
+    if (!gameOver() && timerId !== null) {
+      moveDown();
+    }
+  })
+
 
   document.addEventListener('keydown', control);
 
@@ -138,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameOver();
     }
   }
+
   //move left unless at the edge or there is a tetromino in the way
   //52:14
   function moveLeft() {
@@ -217,10 +246,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       draw();
       timerId = setInterval(moveDown, howFast);
-      nextRandom = Math.floor(Math.random()*theTetrominoes.length);
+      nextRandom = Math.floor(Math.random() * theTetrominoes.length);
       displayShape();
     }
   })
+
+
 
   //add score
   function addScore() {

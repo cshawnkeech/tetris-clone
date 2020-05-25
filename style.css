@@ -16,6 +16,23 @@
   width: 20px;
 }
 
+#left-button {
+  color: blue;
+}
+
+#right-button {
+  color: red;
+}
+
+#rotate-counter-clockwise {
+  color: orange;
+}
+
+#down-button {
+  color: green;
+}
+
+
 .tetromino {
   background-color: #305252; /*#305252;*/
   border-radius: 10%;
